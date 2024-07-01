@@ -1,6 +1,4 @@
-package com.example.familytree.io;
-
-import com.example.familytree.model.FamilyTree;
+package oop;
 
 import java.io.IOException;
 

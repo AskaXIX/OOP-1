@@ -1,13 +1,8 @@
-package com.example.familytree.main;
-
-import com.example.familytree.io.FamilyTreeFileHandler;
-import com.example.familytree.model.FamilyTree;
-import com.example.familytree.model.Person;
+package oop;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class Main {

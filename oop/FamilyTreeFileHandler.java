@@ -1,7 +1,4 @@
-package com.example.familytree.io;
-
-import com.example.familytree.model.FamilyTree;
-import com.example.familytree.model.Person;
+package oop;
 
 import java.io.*;
 import java.util.Map;
@@ -17,6 +14,7 @@ public class FamilyTreeFileHandler implements FamilyTreeIO {
     @Override
     public FamilyTree loadFromFile(String filePath) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            @SuppressWarnings("unchecked")
             Map<String, Person> persons = (Map<String, Person>) ois.readObject();
             FamilyTree familyTree = new FamilyTree();
             familyTree.setPersons(persons);
