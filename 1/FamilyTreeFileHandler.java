@@ -1,5 +1,9 @@
+package com.example.familytree.io;
+
+import com.example.familytree.model.FamilyTree;
+import com.example.familytree.model.Person;
+
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
 
 public class FamilyTreeFileHandler implements FamilyTreeIO {

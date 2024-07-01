@@ -1,17 +1,20 @@
+package com.example.familytree.model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Person implements Serializable {
     private String name;
-    private int age;
+    private Date birthDate;
     private Person father;
     private Person mother;
     private List<Person> children;
 
-    public Person(String name, int age) {
+    public Person(String name, Date birthDate) {
         this.name = name;
-        this.age = age;
+        this.birthDate = birthDate;
         this.children = new ArrayList<>();
     }
 
@@ -19,8 +22,8 @@ public class Person implements Serializable {
         return name;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
     public Person getFather() {

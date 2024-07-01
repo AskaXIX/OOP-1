@@ -1,3 +1,7 @@
+package com.example.familytree.io;
+
+import com.example.familytree.model.FamilyTree;
+
 import java.io.IOException;
 
 public interface FamilyTreeIO {

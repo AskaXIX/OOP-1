@@ -1,38 +1,53 @@
-import java.io.Serializable;
-import java.security.Permission;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package com.example.familytree.model;
 
-public class FamilyTree implements Serializable {
-    private Map<String, Permission> persons;
+import java.io.Serializable;
+import java.util.*;
+
+public class FamilyTree implements Serializable, Iterable<Person> {
+    private Map<String, Person> persons;
 
     public FamilyTree() {
         this.persons = new HashMap<>();
     }
 
-    public void addPerson(Permission person) {
+    public void addPerson(Person person) {
         persons.put(person.getName(), person);
     }
 
-    public Permission getPerson(String name) {
+    public Person getPerson(String name) {
         return persons.get(name);
     }
 
-    public List<Permission> getChildrenOf(String name) {
-        Permission person = getPerson(name);
+    public List<Person> getChildrenOf(String name) {
+        Person person = getPerson(name);
         if (person != null) {
             return person.getChildren();
         }
         return new ArrayList<>();
     }
 
-    public Map<String, Permission> getPersons() {
+    public Map<String, Person> getPersons() {
         return persons;
     }
 
-    public void setPersons(Map<String, Permission> persons) {
+    public void setPersons(Map<String, Person> persons) {
         this.persons = persons;
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return persons.values().iterator();
+    }
+
+    public List<Person> getSortedPersonsByName() {
+        List<Person> sortedList = new ArrayList<>(persons.values());
+        sortedList.sort(Comparator.comparing(Person::getName));
+        return sortedList;
+    }
+
+    public List<Person> getSortedPersonsByBirthDate() {
+        List<Person> sortedList = new ArrayList<>(persons.values());
+        sortedList.sort(Comparator.comparing(Person::getBirthDate));
+        return sortedList;
     }
 }
