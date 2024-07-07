@@ -1,8 +1,7 @@
 package oop;
+import java.io.*;
 
-import java.io.IOException;
-
-public interface FamilyTreeIO {
-    void saveToFile(FamilyTree familyTree, String filePath) throws IOException;
-    FamilyTree loadFromFile(String filePath) throws IOException, ClassNotFoundException;
+public interface FamilyTreeIO<T extends Serializable> {
+    void saveToFile(FamilyTree<T> familyTree, String filePath) throws IOException;
+    FamilyTree<T> loadFromFile(String filePath) throws IOException, ClassNotFoundException;
 }

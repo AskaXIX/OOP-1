@@ -3,11 +3,12 @@ package oop;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Person> familyTree = new FamilyTree<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
@@ -30,15 +31,15 @@ public class Main {
             mary.addChild(anna);
 
             // Добавление людей в генеалогическое древо
-            familyTree.addPerson(john);
-            familyTree.addPerson(mary);
-            familyTree.addPerson(mike);
-            familyTree.addPerson(anna);
+            familyTree.addEntity(john.getName(), john);
+            familyTree.addEntity(mary.getName(), mary);
+            familyTree.addEntity(mike.getName(), mike);
+            familyTree.addEntity(anna.getName(), anna);
         } catch (ParseException e) {
             System.err.println("Error parsing date: " + e.getMessage());
         }
 
-        FamilyTreeFileHandler fileHandler = new FamilyTreeFileHandler();
+        FamilyTreeFileHandler<Person> fileHandler = new FamilyTreeFileHandler<>();
 
         // Сохранение генеалогического древа в файл
         try {
@@ -49,18 +50,18 @@ public class Main {
 
         // Загрузка генеалогического древа из файла
         try {
-            FamilyTree loadedFamilyTree = fileHandler.loadFromFile("familyTree.dat");
+            FamilyTree<Person> loadedFamilyTree = fileHandler.loadFromFile("familyTree.dat");
 
             // Сортировка и вывод по имени
             System.out.println("Persons sorted by name:");
-            List<Person> sortedByName = loadedFamilyTree.getSortedPersonsByName();
+            List<Person> sortedByName = loadedFamilyTree.getSortedEntitiesByComparator(Comparator.comparing(Person::getName));
             for (Person person : sortedByName) {
                 System.out.println(person.getName());
             }
 
             // Сортировка и вывод по дате рождения
             System.out.println("\nPersons sorted by birth date:");
-            List<Person> sortedByBirthDate = loadedFamilyTree.getSortedPersonsByBirthDate();
+            List<Person> sortedByBirthDate = loadedFamilyTree.getSortedEntitiesByComparator(Comparator.comparing(Person::getBirthDate));
             SimpleDateFormat outputSdf = new SimpleDateFormat("yyyy-MM-dd");
             for (Person person : sortedByBirthDate) {
                 System.out.println(person.getName() + " - " + outputSdf.format(person.getBirthDate()));

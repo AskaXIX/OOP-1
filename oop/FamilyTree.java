@@ -3,51 +3,43 @@ package oop;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable, Iterable<Person> {
-    private Map<String, Person> persons;
+public class FamilyTree<T extends Serializable> implements Serializable, Iterable<T> {
+    private Map<String, T> entities;
 
     public FamilyTree() {
-        this.persons = new HashMap<>();
+        this.entities = new HashMap<>();
     }
 
-    public void addPerson(Person person) {
-        persons.put(person.getName(), person);
+    public void addEntity(String name, T entity) {
+        entities.put(name, entity);
     }
 
-    public Person getPerson(String name) {
-        return persons.get(name);
+    public T getEntity(String name) {
+        return entities.get(name);
     }
 
-    public List<Person> getChildrenOf(String name) {
-        Person person = getPerson(name);
-        if (person != null) {
-            return person.getChildren();
-        }
-        return new ArrayList<>();
+    public Map<String, T> getEntities() {
+        return entities;
     }
 
-    public Map<String, Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(Map<String, Person> persons) {
-        this.persons = persons;
+    public void setEntities(Map<String, T> entities) {
+        this.entities = entities;
     }
 
     @Override
-    public Iterator<Person> iterator() {
-        return persons.values().iterator();
+    public Iterator<T> iterator() {
+        return entities.values().iterator();
     }
 
-    public List<Person> getSortedPersonsByName() {
-        List<Person> sortedList = new ArrayList<>(persons.values());
-        sortedList.sort(Comparator.comparing(Person::getName));
+    public List<T> getSortedEntitiesByName(Comparator<T> comparator) {
+        List<T> sortedList = new ArrayList<>(entities.values());
+        sortedList.sort(comparator);
         return sortedList;
     }
 
-    public List<Person> getSortedPersonsByBirthDate() {
-        List<Person> sortedList = new ArrayList<>(persons.values());
-        sortedList.sort(Comparator.comparing(Person::getBirthDate));
+    public List<T> getSortedEntitiesByComparator(Comparator<T> comparator) {
+        List<T> sortedList = new ArrayList<>(entities.values());
+        sortedList.sort(comparator);
         return sortedList;
     }
 }

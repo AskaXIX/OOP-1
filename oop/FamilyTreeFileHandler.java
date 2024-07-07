@@ -3,21 +3,20 @@ package oop;
 import java.io.*;
 import java.util.Map;
 
-public class FamilyTreeFileHandler implements FamilyTreeIO {
+public class FamilyTreeFileHandler<T extends Serializable> implements FamilyTreeIO<T> {
     @Override
-    public void saveToFile(FamilyTree familyTree, String filePath) throws IOException {
+    public void saveToFile(FamilyTree<T> familyTree, String filePath) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            oos.writeObject(familyTree.getPersons());
+            oos.writeObject(familyTree.getEntities());
         }
     }
 
     @Override
-    public FamilyTree loadFromFile(String filePath) throws IOException, ClassNotFoundException {
+    public FamilyTree<T> loadFromFile(String filePath) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-            @SuppressWarnings("unchecked")
-            Map<String, Person> persons = (Map<String, Person>) ois.readObject();
-            FamilyTree familyTree = new FamilyTree();
-            familyTree.setPersons(persons);
+            Map<String, T> entities = (Map<String, T>) ois.readObject();
+            FamilyTree<T> familyTree = new FamilyTree<>();
+            familyTree.setEntities(entities);
             return familyTree;
         }
     }
