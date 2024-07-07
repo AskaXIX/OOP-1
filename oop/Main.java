@@ -6,6 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.List;
 
+import oop.model.FamilyTree;
+import oop.model.FamilyTreeFileHandler;
+import oop.model.Person;
+
 public class Main {
     public static void main(String[] args) {
         FamilyTree<Person> familyTree = new FamilyTree<>();

@@ -1,4 +1,4 @@
-package oop;
+package oop.model;
 import java.io.*;
 
 public interface FamilyTreeIO<T extends Serializable> {
