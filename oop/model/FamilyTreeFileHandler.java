@@ -14,6 +14,7 @@ public class FamilyTreeFileHandler<T extends Serializable> implements FamilyTree
     @Override
     public FamilyTree<T> loadFromFile(String filePath) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            @SuppressWarnings("unchecked")
             Map<String, T> entities = (Map<String, T>) ois.readObject();
             FamilyTree<T> familyTree = new FamilyTree<>();
             familyTree.setEntities(entities);

@@ -8,21 +8,22 @@ import java.util.Date;
 import java.util.List;
 
 import oop.model.FamilyTree;
-import oop.model.FamilyTreeFileHandler;
+import oop.model.FamilyTreeIO;
 import oop.model.Person;
 import oop.view.FamilyTreeView;
 
 public class FamilyTreePresenterImpl implements FamilyTreePresenter {
     private final FamilyTreeView view;
     private final FamilyTree<Person> familyTree;
-    private final FamilyTreeFileHandler<Person> fileHandler;
+    private final FamilyTreeIO<Person> fileHandler;
     private final SimpleDateFormat sdf;
 
-    public FamilyTreePresenterImpl(FamilyTreeView view) {
+    public FamilyTreePresenterImpl(FamilyTreeView view, FamilyTreeIO<Person> fileHandler) {
         this.view = view;
+        this.fileHandler = fileHandler;
         this.familyTree = new FamilyTree<>();
-        this.fileHandler = new FamilyTreeFileHandler<>();
         this.sdf = new SimpleDateFormat("yyyy-MM-dd");
+        this.view.setPresenter(this);
     }
 
     @Override

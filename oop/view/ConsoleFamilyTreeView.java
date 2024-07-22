@@ -2,16 +2,21 @@ package oop.view;
 
 import java.util.Scanner;
 
+import oop.model.FamilyTreeFileHandler;
 import oop.presenter.FamilyTreePresenter;
 import oop.presenter.FamilyTreePresenterImpl;
 
 public class ConsoleFamilyTreeView implements FamilyTreeView {
-    private final FamilyTreePresenter presenter;
+    private FamilyTreePresenter presenter;
     private final Scanner scanner;
 
     public ConsoleFamilyTreeView() {
-        this.presenter = new FamilyTreePresenterImpl(this);
         this.scanner = new Scanner(System.in);
+    }
+
+    @Override
+    public void setPresenter(FamilyTreePresenter presenter) {
+        this.presenter = presenter;
     }
 
     public void start() {
@@ -106,6 +111,8 @@ public class ConsoleFamilyTreeView implements FamilyTreeView {
 
     public static void main(String[] args) {
         ConsoleFamilyTreeView view = new ConsoleFamilyTreeView();
+        FamilyTreePresenter presenter = new FamilyTreePresenterImpl(view, new FamilyTreeFileHandler<>());
+        view.setPresenter(presenter);
         view.start();
     }
 }
